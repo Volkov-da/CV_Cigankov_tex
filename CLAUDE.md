@@ -28,6 +28,8 @@ latexmk -c                            # clean aux files
 python -m http.server 8000 --bind 127.0.0.1   # then open http://localhost:8000/site/
 ```
 
+It is deployed to https://volkov-da.github.io/CV_Cigankov_tex/ by `.github/workflows/pages.yml` on every push to `main` that touches `site/`, the square photo or the PDF. The workflow rewrites the `../` paths and copies only those three files. If the page starts using another asset, add it to the workflow's copy step and `paths:` list. The PDF is committed, not built in CI, so recompile it before pushing.
+
 ## Layout model (spans the .tex and the .cls)
 
 - **Personal data** (`\cvname`, `\cvjobtitle`, `\cvprofilepic`, `\cvbirthday`, `\cvphone`, `\cvmail`, `\cvaddress`, …) is declared in the preamble. The order of declaration sets the order in the sidebar's personal info table.
