@@ -33,6 +33,7 @@ jobs:
       - name: Assemble site
         run: |
           mkdir -p _site/pics
+          cp -r site/. _site/
           sed -e 's#\.\./pics/#pics/#g' -e 's#\.\./CV_Cigankov\.pdf#CV_Cigankov.pdf#g' \
             site/index.html > _site/index.html
           cp pics/profile_5_square.jpg _site/pics/
