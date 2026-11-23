@@ -1,0 +1,49 @@
+name: Deploy landing page to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "site/**"
+      - "pics/profile_5_square.jpg"
+      - "CV_Cigankov.pdf"
+      - ".github/workflows/pages.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+
+      # site/index.html references ../pics and ../CV_Cigankov.pdf so it works
+      # when served from the repo root locally; flatten for Pages.
+      - name: Assemble site
+        run: |
+          mkdir -p _site/pics
+          sed -e 's#\.\./pics/#pics/#g' -e 's#\.\./CV_Cigankov\.pdf#CV_Cigankov.pdf#g' \
+            site/index.html > _site/index.html
+          cp pics/profile_5_square.jpg _site/pics/
+          cp CV_Cigankov.pdf _site/
+          if grep -q '\.\./' _site/index.html; then
+            echo "Unresolved ../ paths in index.html"; exit 1
+          fi
+
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+      - id: deployment
+        uses: actions/deploy-pages@v4

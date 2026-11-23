@@ -20,6 +20,14 @@ latexmk -c                            # clean aux files
 - The warning `requested document class 'cv_class', but the document class provides 'fortysecondscv'` is expected and harmless.
 - `*.aux`, `*.log`, `*.out` and `*.synctex.gz` are build artifacts. `template.synctex.gz` is left over from upstream.
 
+## Landing page
+
+`site/index.html` is a static one-page site (inline CSS, no build step) with the same content as the CV. Its text is copied by hand, so when you change the CV content, update the page too. It loads `../pics/profile_5_square.jpg` and `../CV_Cigankov.pdf`, so serve from the **repo root**:
+
+```sh
+python -m http.server 8000 --bind 127.0.0.1   # then open http://localhost:8000/site/
+```
+
 ## Layout model (spans the .tex and the .cls)
 
 - **Personal data** (`\cvname`, `\cvjobtitle`, `\cvprofilepic`, `\cvbirthday`, `\cvphone`, `\cvmail`, `\cvaddress`, …) is declared in the preamble. The order of declaration sets the order in the sidebar's personal info table.
