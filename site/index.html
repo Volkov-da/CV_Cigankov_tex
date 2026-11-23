@@ -134,6 +134,8 @@
   }
   .sub { color: var(--muted); font-size: 15px; font-weight: 600; margin: 24px 0 10px; text-transform: uppercase; letter-spacing: .05em; }
   .sub:first-child { margin-top: 0; }
+  .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; }
+  .skills-grid .tags li { background: var(--bg); }
 
   /* Contacts */
   .contacts { background: var(--main); color: #fff; }
@@ -164,6 +166,7 @@
       <li><a href="#services">Услуги</a></li>
       <li><a href="#experience">Опыт</a></li>
       <li><a href="#education">Образование</a></li>
+      <li><a href="#skills">Навыки</a></li>
       <li><a href="#contacts">Контакты</a></li>
     </ul>
   </div>
@@ -307,8 +310,10 @@
             </div>
           </li>
         </ol>
+      </div>
 
-        <h2 style="margin-top:40px">Публикации и награды</h2>
+      <div>
+        <h2>Публикации и награды</h2>
         <ol class="timeline">
           <li>
             <div class="when">2020</div>
@@ -326,9 +331,14 @@
           </li>
         </ol>
       </div>
+    </div>
+  </section>
 
-      <div>
-        <h2>Навыки</h2>
+  <section id="skills">
+    <div class="wrap">
+      <h2>Навыки</h2>
+      <div class="skills-grid">
+      <div class="card">
         <p class="sub">Профессиональные</p>
         <ul class="tags">
           <li>Хирургическое лечение</li>
@@ -338,6 +348,8 @@
           <li>Работа в 4 руки</li>
           <li>Медицинская документация</li>
         </ul>
+      </div>
+      <div class="card">
         <p class="sub">Личные качества</p>
         <ul class="tags">
           <li>Ответственность</li>
@@ -345,11 +357,14 @@
           <li>Сдержанность</li>
           <li>Трудолюбие</li>
         </ul>
+      </div>
+      <div class="card">
         <p class="sub">Языки</p>
         <ul class="tags">
           <li>Русский — родной</li>
           <li>Английский — средний</li>
         </ul>
+      </div>
       </div>
     </div>
   </section>
